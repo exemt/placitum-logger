@@ -23,9 +23,10 @@ import (
 	"github.com/exemt/placitum-logger/internal/ch"
 	"github.com/exemt/placitum-logger/internal/consume"
 	"github.com/exemt/placitum-logger/internal/flow"
-	"github.com/exemt/placitum-logger/internal/logkit"
 	"github.com/exemt/placitum-logger/internal/migrate"
 	"github.com/exemt/placitum-logger/internal/pulse"
+	"github.com/exemt/placitum-shared/logkit"
+	"github.com/exemt/placitum-shared/loglevel"
 )
 
 func main() {
@@ -38,7 +39,7 @@ func main() {
 func run() error {
 	name := env("WAF_SERVICE_NAME", "logger")
 
-	level, err := logkit.Env("WAF_LOGGER_LOG", "info")
+	level, err := loglevel.Env("WAF_LOGGER_LOG", "info")
 	if err != nil {
 		return err
 	}

@@ -22,8 +22,9 @@ import (
 
 	"github.com/exemt/placitum-logger/internal/ch"
 	"github.com/exemt/placitum-logger/internal/httpapi"
-	"github.com/exemt/placitum-logger/internal/logkit"
 	"github.com/exemt/placitum-logger/internal/store"
+	"github.com/exemt/placitum-shared/logkit"
+	"github.com/exemt/placitum-shared/loglevel"
 )
 
 func main() {
@@ -34,12 +35,12 @@ func main() {
 }
 
 func run() error {
-	level, err := logkit.Env("WAF_SEARCH_LOG", "info")
+	level, err := loglevel.Env("WAF_SEARCH_LOG", "info")
 	if err != nil {
 		return err
 	}
 
-	// Журнал поиска -- в waf.log (internal/logkit); шина ему -- ниже.
+	// Журнал поиска -- в waf.log (shared/logkit); шина ему -- ниже.
 	journal := logkit.Open(logkit.Options{Service: "search", Level: level})
 	defer journal.Close()
 

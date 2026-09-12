@@ -148,9 +148,9 @@ func TestCardOfWithoutActions(t *testing.T) {
  */
 func TestCardOfRewrite(t *testing.T) {
 	ev := Event{
-		Node:  "edge-01",
-		Ray:   "r",
-		Phase: "response",
+		Node:       "edge-01",
+		Ray:        "r",
+		Phase:      "response",
 		Inspectors: []string{"rewrite", "rewrite-obs"},
 		InspectorsVerdict: map[string]string{
 			"rewrite":     "allow",
