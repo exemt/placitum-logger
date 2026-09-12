@@ -3,7 +3,7 @@ package consume
 import (
 	"sync/atomic"
 
-	"github.com/exemt/placitum-logger/internal/flow"
+	"github.com/exemt/placitum-shared/flow"
 )
 
 // Stats — счётчики для пульса флота. Не влияют на ack. Consume/Insert —

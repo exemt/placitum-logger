@@ -22,9 +22,9 @@ import (
 
 	"github.com/exemt/placitum-logger/internal/ch"
 	"github.com/exemt/placitum-logger/internal/consume"
-	"github.com/exemt/placitum-logger/internal/flow"
 	"github.com/exemt/placitum-logger/internal/migrate"
 	"github.com/exemt/placitum-logger/internal/pulse"
+	"github.com/exemt/placitum-shared/flow"
 	"github.com/exemt/placitum-shared/logkit"
 	"github.com/exemt/placitum-shared/loglevel"
 )

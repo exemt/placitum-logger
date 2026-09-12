@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/ClickHouse/clickhouse-go/v2 v2.40.0
-	github.com/exemt/placitum-shared v0.2.0
+	github.com/exemt/placitum-shared v0.3.0
 	github.com/nats-io/nats.go v1.53.1
 )
 
