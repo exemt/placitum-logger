@@ -55,6 +55,8 @@ func run() error {
 	defer journal.Close()
 
 	log := journal.Log
+
+	log.Info("build", "version", version, "revision", revision)
 	slog.SetDefault(log)
 
 	natsURL := env("WAF_NATS_URL", "nats://127.0.0.1:4222")
@@ -158,6 +160,7 @@ func startHeartbeat(
 			"log": logIO.Snapshot(),
 		}
 		msg := pulse.Build(id, name, work, io)
+		msg.Version, msg.Revision = version, revision
 		if err := pulse.Publish(nc, msg); err != nil {
 			log.Warn("heartbeat failed", "error", err.Error())
 			return

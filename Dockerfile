@@ -34,8 +34,12 @@ COPY schema ./schema
 # просыпается только при WAF_CH_ADDR в окружении.
 RUN go test ./...
 
-RUN go build -trimpath -ldflags="-s -w" -o /out/waf-logger ./cmd/logger && \
-    go build -trimpath -ldflags="-s -w" -o /out/waf-search ./cmd/search
+# Сборка в бинарь: версия и ревизия видны в журнале старта и в кадре
+# присутствия, а не только в метках образа.
+ARG VERSION=dev
+ARG REVISION=unknown
+RUN go build -trimpath -ldflags="-s -w -X main.version=${VERSION} -X main.revision=${REVISION}" -o /out/waf-logger ./cmd/logger && \
+    go build -trimpath -ldflags="-s -w -X main.version=${VERSION} -X main.revision=${REVISION}" -o /out/waf-search ./cmd/search
 
 FROM alpine:3.22
 
