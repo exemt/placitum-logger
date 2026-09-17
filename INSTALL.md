@@ -59,6 +59,7 @@ the log subscription then waits for it, and the audit is read as usual.
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `SEARCH_PORT` | `8091` | HTTP API port |
+| `SEARCH_HOST` | empty | address to listen on; empty means all addresses, which suits a container. Without Docker set `127.0.0.1`: the API has no login |
 | `CLICKHOUSE_ADDR`, `CLICKHOUSE_USER`, `CLICKHOUSE_PASSWORD` | as above | where it reads |
 | `WAF_SEARCH_LOG` | `info` | log level |
 | `WAF_NATS_URL` | empty | only for its own log and live log level; search works without it |

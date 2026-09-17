@@ -51,7 +51,9 @@ func run() error {
 		return err
 	}
 
-	addr := ":" + env("SEARCH_PORT", "8091")
+	// SEARCH_HOST keeps an API without login off the outside addresses where no container
+	// boundary does it; empty listens on all of them.
+	addr := env("SEARCH_HOST", "") + ":" + env("SEARCH_PORT", "8091")
 	srv := &http.Server{
 		Addr:              addr,
 		Handler:           httpapi.Handler(conn, store.New(storeCfg), log),
