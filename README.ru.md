@@ -2,17 +2,17 @@
 
 [English](README.md) · Русский
 
-Журнал Placitum: читает поток аудита с шины, раскладывает сообщения по таблицам и пачками пишет в
+Журнал Placitum: читает поток аудита с шины, раскладывает сообщения по таблицам и пакетами пишет в
 ClickHouse. Рядом работает поиск по тому, что записано.
 
-Он вне горячего пути: сбой ClickHouse не двигает дедлайн проверки запроса. JetStream — буфер, логгер —
+Он вне пути запроса: сбой ClickHouse не двигает дедлайн проверки запроса. JetStream — буфер, логгер —
 durable consumer.
 
 ```
 waf.audit.request.<узел>     ─┐
-waf.audit.inspector.<имя>    ─┴─►  waf-logger  ─ пачкой ─►  waf.audit, waf.audit_finding
+waf.audit.inspector.<имя>    ─┴─►  waf-logger  ─ пакетом ─►  waf.audit, waf.audit_finding
                                         │
-waf.log.<писатель>           ────►      │      ─ пачкой ─►  waf.log
+waf.log.<писатель>           ────►      │      ─ пакетом ─►  waf.log
   (агенты узлов, процессы установки)    │
                                         └─ ack JetStream после вставки
 
