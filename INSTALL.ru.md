@@ -19,7 +19,7 @@
 
 ## Потоки JetStream
 
-**Логгер потоки не создаёт.** Он к ним подключается, и без `WAF_AUDIT` старт завершается отказом с
+**Логгер потоки не создаёт.** Он к ним подключается, и без `WAF_AUDIT` старт завершается ошибкой с
 понятной строкой: поток — свойство установки, и создать его на ходу значило бы молча получить поток с
 чужими лимитами. Заводит их `placitum-core`; руками:
 
@@ -50,7 +50,7 @@ nats stream add WAF_LOG \
 | `WAF_LOGGER_LOG` | `info` | стартовый уровень журнала: `debug`, `info`, `notice`, `warn`, `error`, `crit`, `alert` |
 | `WAF_SERVICE_NAME` | `logger` | имя в кадре присутствия |
 | `WAF_HEARTBEAT_EVERY` | `4s` | период кадра `WAF_STATUS.service.logger.<id>` |
-| `WAF_LOG_SHIP` | `on` | уезжает ли журнал процесса на шину; `off` оставляет только stdout |
+| `WAF_LOG_SHIP` | `on` | уходит ли журнал процесса на шину; `off` оставляет только stdout |
 | `WAF_LOG_WRITER` | имя машины | чем подписан журнал процесса в `waf.log` |
 | `POSTGRES_HOST`, `POSTGRES_PORT`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | `postgres`, `5432`, `waf`, `waf`, `waf` | подставляются в определения словарей: где **ClickHouse** читает каталог |
 
@@ -114,7 +114,7 @@ clickhouse-client -q "SELECT count() FROM waf.schema_migrations"
 # 2. Consumer подключился и читает
 nats consumer info WAF_AUDIT logger-audit-v2
 
-# 3. Записи доезжают (после любого трафика через узел)
+# 3. Записи доходят (после любого трафика через узел)
 clickhouse-client -q "SELECT count() FROM waf.audit WHERE ts > now() - INTERVAL 5 MINUTE"
 
 # 4. Поиск отвечает
@@ -123,7 +123,7 @@ curl -fsS http://127.0.0.1:8091/healthz
 
 При здоровом старте в журнале: `migrations applied`, затем `consuming` с именем потока и durable.
 
-## Грабли
+## Типичные ошибки
 
 - **`CLICKHOUSE_DB` не читается.** Имя базы `waf` зашито в схему и запросы.
 - **Словари гео без PostgreSQL.** Словари создаются, но без каталога не загружаются; ломаются только
