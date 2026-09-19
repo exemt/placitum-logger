@@ -24,7 +24,7 @@ ARG REVISION=unknown
 LABEL org.opencontainers.image.title="placitum/logger" \
       org.opencontainers.image.description="Placitum logger and search: audit stream to ClickHouse, incident search API" \
       org.opencontainers.image.source="https://github.com/exemt/placitum-logger" \
-      org.opencontainers.image.licenses="LicenseRef-Placitum" \
+      org.opencontainers.image.licenses="Apache-2.0" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.revision="${REVISION}"
 
